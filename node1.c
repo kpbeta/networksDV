@@ -122,5 +122,4 @@ void sendNeighbour1(int dest) {
 void sendAll1() {
   sendNeighbour1(0); 
   sendNeighbour1(2);
-  sendNeighbour1(3);
 }

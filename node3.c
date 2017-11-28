@@ -111,6 +111,5 @@ void sendNeighbour3(int dest) {
 
 void sendAll3() {
   sendNeighbour3(0);
-  sendNeighbour3(1);
-  sendNeighbour3(3);
+  sendNeighbour3(2);
 }
