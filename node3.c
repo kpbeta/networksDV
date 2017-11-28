@@ -55,6 +55,11 @@ void rtinit3()
   dt3.costs[2][2] = 2;
   //-------------------------------------------------
 
+  minSyncPkt->mincost[0] = 3;
+  minSyncPkt->mincost[1] = INF;
+  minSyncPkt->mincost[2] = 2;
+  minSyncPkt->mincost[3] = 0;
+
   printdt3(&dt3);
   sendAll3();
 }
@@ -78,7 +83,7 @@ void rtupdate3(rcvdpkt)
       if ((i != NODE) && (i != sid)) { // Don
         
         dist2node = rcvdpkt-> mincost[i] + dt3.costs[sid][sid];
-        dt3.costs[i][sid] = dist2node;
+        dt3.costs[i][sid] = (dist2node > rcvdpkt-> mincost[i])?rcvdpkt-> mincost[i]:dist2node;
 
         if (dt3.costs[i][sid] > dist2node) {
           changed = 1;
@@ -101,7 +106,7 @@ void rtupdate3(rcvdpkt)
 
 void sendNeighbour3(int dest) {
   minSyncPkt->destid = dest;
-  tolayer2(minSyncPkt);
+  tolayer2(*minSyncPkt);
 }
 
 void sendAll3() {

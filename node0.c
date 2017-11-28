@@ -59,6 +59,11 @@ void rtinit0()
   dt0.costs[3][3] = 7;
   //-------------------------------------------------
 
+  minSyncPkt->mincost[0] = 0;
+  minSyncPkt->mincost[1] = 1;
+  minSyncPkt->mincost[2] = 3;
+  minSyncPkt->mincost[3] = 7;
+
   printdt0(&dt0);
   sendAll0();
 }
@@ -82,7 +87,7 @@ void rtupdate0(rcvdpkt)
       if ((i != NODE) && (i != sid)) {
         
         dist2node = rcvdpkt-> mincost[i] + dt0.costs[sid][sid];
-        dt0.costs[i][sid] = dist2node;
+        dt0.costs[i][sid] = (dist2node > rcvdpkt-> mincost[i])?rcvdpkt-> mincost[i]:dist2node;
 
         if (dt0.costs[i][sid] > dist2node) {
           changed = 1;
@@ -116,7 +121,7 @@ void linkhandler0(linkid, newcost)
 
 void sendNeighbour0(int dest) {
   minSyncPkt->destid = dest;
-  tolayer2(minSyncPkt);  
+  tolayer2(*minSyncPkt);  
 }
 
 void sendAll0() {

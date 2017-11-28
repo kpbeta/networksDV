@@ -33,8 +33,7 @@ void rtinit1()
   printf("----------------------------------------------\n");
   printf("Node %d initialized at time %f \n", NODE, clocktime);
   printf("----------------------------------------------\n");
-  
-  
+    
   minSyncPkt = (struct rtpkt *)malloc( sizeof(struct rtpkt) );
   minSyncPkt->sourceid = 1;
 
@@ -54,6 +53,11 @@ void rtinit1()
   dt1.costs[0][0] = 1;
   dt1.costs[2][2] = 1;
   //-------------------------------------------------
+
+  minSyncPkt->mincost[0] = 1;
+  minSyncPkt->mincost[1] = 0;
+  minSyncPkt->mincost[2] = 3;
+  minSyncPkt->mincost[3] = INF;
 
   printdt1(&dt1);
   sendAll1();
@@ -78,7 +82,7 @@ void rtupdate1(rcvdpkt)
       if ((i != NODE) && (i != sid)) {
         
         dist2node = rcvdpkt-> mincost[i] + dt1.costs[sid][sid];
-        dt1.costs[i][sid] = dist2node;
+        dt1.costs[i][sid] = (dist2node > rcvdpkt-> mincost[i])?rcvdpkt-> mincost[i]:dist2node;
 
         if (dt1.costs[i][sid] > dist2node) {
           changed = 1;
@@ -111,12 +115,12 @@ int linkid, newcost;
 
 void sendNeighbour1(int dest) {
   minSyncPkt->destid = dest;
-  tolayer2(minSyncPkt);  
+  tolayer2(*minSyncPkt);  
 }
 
 
 void sendAll1() {
-  sendNeighbour1(0);
+  sendNeighbour1(0); 
   sendNeighbour1(2);
   sendNeighbour1(3);
 }

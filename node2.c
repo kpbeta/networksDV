@@ -61,6 +61,11 @@ void rtinit2()
 
   //-------------------------------------------------
 
+  minSyncPkt->mincost[0] = 3;
+  minSyncPkt->mincost[1] = 1;
+  minSyncPkt->mincost[2] = 0;
+  minSyncPkt->mincost[3] = 2;
+
   printdt2(&dt2);
   sendAll2();
 }
@@ -84,7 +89,7 @@ void rtupdate2(rcvdpkt)
       if ((i != NODE) && (i != sid)) {
         
         dist2node = rcvdpkt-> mincost[i] + dt2.costs[sid][sid];
-        dt2.costs[i][sid] = dist2node;
+        dt2.costs[i][sid] = (dist2node > rcvdpkt-> mincost[i])?rcvdpkt-> mincost[i]:dist2node;
 
         if (dt2.costs[i][sid] > dist2node) {
           changed = 1;
@@ -107,7 +112,7 @@ void rtupdate2(rcvdpkt)
 
 void sendNeighbour2(int dest) {
   minSyncPkt->destid = dest;
-  tolayer2(minSyncPkt);
+  tolayer2(*minSyncPkt);
 }
 
 void sendAll2() {
