@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "dvr.h"
+#include <stdlib.h>
 
 // Macros
 #define INF 999
@@ -12,6 +13,8 @@ struct rtpkt *minSyncPkt;
 // Prototypes
 void sendNeighbour1(int dest);
 void sendAll1();
+void printdt1(dtptr)
+  struct distance_table *dtptr;
 
 
 /* students to write the following two routines, and maybe some others */

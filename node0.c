@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "dvr.h"
+#include <stdlib.h>
 
 // Macros
 #define INF 999
@@ -13,6 +14,9 @@ struct rtpkt *minSyncPkt;
 void sendNeighbour0(int dest);
 void sendAll0();
 
+void printdt0(dtptr)
+  struct distance_table *dtptr;
+
 
 /* students to write the following two routines, and maybe some others */
 void rtinit0() 
@@ -22,7 +26,7 @@ void rtinit0()
   printf("----------------------------------------------\n");
   
   minSyncPkt = (struct rtpkt *)malloc( sizeof(struct rtpkt) );
-  minSyncPkt->sourceid = 0;
+  minSyncPkt->sourceid = NODE;
 
   // Initialize the costs
   //-------------------------------------------------
