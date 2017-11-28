@@ -87,10 +87,11 @@ void rtupdate0(rcvdpkt)
       if ((i != NODE) && (i != sid)) {
         
         dist2node = rcvdpkt-> mincost[i] + dt0.costs[sid][sid];
-        dt0.costs[i][sid] = (dist2node > rcvdpkt-> mincost[i])?rcvdpkt-> mincost[i]:dist2node;
+        printf("dist2node to node %d from %d is %d\n", i, sid, dist2node);
 
         if (dt0.costs[i][sid] > dist2node) {
           changed = 1;
+          dt0.costs[i][sid] = dist2node;
           minSyncPkt->mincost[i] = dist2node;
         }  
       }
