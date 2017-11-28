@@ -1,3 +1,7 @@
+/*
+ * @author Kalyan Parajuli
+ */
+
 #include <stdio.h>
 #include "dvr.h"
 #include <stdlib.h>
