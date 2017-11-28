@@ -76,7 +76,7 @@ void rtupdate1(rcvdpkt)
   printf("----------------------------------------------\n");
   
   
-  if (rcvdpkt->destid == 0) { //discard if not directed to it
+  if (rcvdpkt->destid == 1) { //discard if not directed to it
 
     for (int i=0; i<4; i++) {
       if ((i != NODE) && (i != sid)) {

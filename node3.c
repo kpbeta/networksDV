@@ -77,12 +77,13 @@ void rtupdate3(rcvdpkt)
   printf("----------------------------------------------\n");
   
   
-  if (rcvdpkt->destid == 0) { //discard if not directed to it
+  if (rcvdpkt->destid == 3) { //discard if not directed to it
 
     for (int i=0; i<4; i++) {
-      if ((i != NODE) && (i != sid)) { // Don
+      if ((i != NODE) && (i != sid)) {
         
         dist2node = rcvdpkt-> mincost[i] + dt3.costs[sid][sid];
+        printf("dist2node to node %d from %d is %d\n", i, sid, dist2node);
         dt3.costs[i][sid] = (dist2node > rcvdpkt-> mincost[i])?rcvdpkt-> mincost[i]:dist2node;
 
         if (dt3.costs[i][sid] > dist2node) {
