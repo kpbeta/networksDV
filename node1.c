@@ -56,7 +56,7 @@ void rtinit1()
 
   minSyncPkt->mincost[0] = 1;
   minSyncPkt->mincost[1] = 0;
-  minSyncPkt->mincost[2] = 3;
+  minSyncPkt->mincost[2] = 1;
   minSyncPkt->mincost[3] = INF;
 
   printdt1(&dt1);

@@ -55,7 +55,7 @@ void rtinit3()
   dt3.costs[2][2] = 2;
   //-------------------------------------------------
 
-  minSyncPkt->mincost[0] = 3;
+  minSyncPkt->mincost[0] = 7;
   minSyncPkt->mincost[1] = INF;
   minSyncPkt->mincost[2] = 2;
   minSyncPkt->mincost[3] = 0;
